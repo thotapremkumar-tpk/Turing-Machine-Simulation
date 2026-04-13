@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Universal Turing Machine Simulator</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="hdr">
+  <div class="logo">UTM</div>
+  <div>
+    <div class="htitle">Universal Turing Machine Simulator</div>
+    <div class="hsub">Formal Language Theory · Automata Visualization</div>
+  </div>
+  <div class="hflex"></div>
+  <div class="hbadge" id="hbadge">Select a language</div>
+</div>
+
+<div id="app">
+  <!-- SIDEBAR -->
+  <div id="sb">
+
+    <div class="ss">
+      <div class="sl">Language</div>
+      <select id="lsel" onchange="onLangChange()"></select>
+    </div>
+
+    <div class="ss">
+      <div class="sl">Input String</div>
+      <input type="text" id="instr" placeholder="Enter input…" value="aabb">
+      <div id="stbadge"></div>
+    </div>
+
+    <div class="ss">
+      <div class="sl">Test Cases</div>
+      <div class="tcs" id="tcs"></div>
+    </div>
+
+    <div class="ss">
+      <div class="sl">Controls</div>
+      <div class="bg">
+        <button class="btn bac" onclick="loadM()">↺ Load</button>
+        <button class="btn bac" id="bstep" onclick="doStep()" disabled>→ Step</button>
+        <button class="btn bgr bfull" id="brun" onclick="doRun()" disabled>▶ Auto Run</button>
+        <button class="btn bam" id="bpause" onclick="doPause()" disabled>⏸ Pause</button>
+        <button class="btn bre" id="breset" onclick="doReset()" disabled>⟲ Reset</button>
+      </div>
+    </div>
+
+    <div class="ss">
+      <div class="sl">Speed</div>
+      <input type="range" id="spd" min="80" max="2000" value="600" step="40">
+      <div class="slbl"><span>Fast</span><span>Slow</span></div>
+    </div>
+
+    <div class="ss">
+      <div class="sl">Machine Info</div>
+      <table class="itable">
+        <tr><td>States</td><td id="ii-s">—</td></tr>
+        <tr><td>Input Σ</td><td id="ii-a">—</td></tr>
+        <tr><td>Tape Γ</td><td id="ii-t">—</td></tr>
+        <tr><td>Start</td><td id="ii-q0">—</td></tr>
+        <tr><td>Accept</td><td id="ii-qa">—</td></tr>
+        <tr><td>Reject</td><td id="ii-qr">—</td></tr>
+        <tr><td>|δ|</td><td id="ii-d">—</td></tr>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- MAIN -->
+  <div id="main">
+
+    <!-- TAPE -->
+    <div id="tapepanel">
+      <div class="tphdr">
+        <span class="tptitle">◈ Tape</span>
+        <span class="steppill" id="stpp">STEP 0</span>
+      </div>
+      <div class="tpscroll" id="tpscroll">
+        <div class="tptrack" id="tptrack"></div>
+      </div>
+    </div>
+
+    <!-- BOTTOM: diagram + right panel -->
+    <div id="bottom">
+      <div id="diagpanel">
+        <div class="plbl">◈ State Diagram</div>
+        <svg id="svgd" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+      <div id="rzh"></div>
+      <div id="rp">
+        <div id="tblsec">
+          <div class="rphdr">
+            <span>Transition Function δ</span>
+            <span class="cnt" id="dcnt">—</span>
+          </div>
+          <div id="tblwrap"><div class="anote">Load a machine to see transitions.</div></div>
+        </div>
+        <div id="logsec">
+          <div class="rphdr"><span>Execution Log</span></div>
+          <div id="logent"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
